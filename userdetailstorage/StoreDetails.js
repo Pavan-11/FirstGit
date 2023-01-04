@@ -38,9 +38,40 @@ function showUserOnScreen(obj){
         localStorage.removeItem(obj.email)
         parentElem.removeChild(childElem)
     }
+
+
+    const editButton = document.createElement('input')
+    editButton.type  = 'button'
+    editButton.value = 'edit'
+    editButton.onclick = () =>{
+        localStorage.removeItem(obj.email)
+        parentElem.removeChild(childElem)
+
+        document.getElementById("name").value = obj.name;
+        document.getElementById("email").value = obj.email;
+    }
     childElem.appendChild(deleteButton)
+    childElem.appendChild(editButton)
+
     parentElem.appendChild(childElem)
 
+    
+    
+    if(nameInput.value === '' || emailInput.value === ''){
+        msg.classList.add('error')
+        msg.innerHTML = 'please enter all fields';
+        setTimeout(() => msg.remove(),3000)
+    }else {
+        
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(`${nameInput.value}: ${emailInput.value}`));
+        userList.appendChild(li);
+        
+        nameInput.value = '';
+        emailInput.value ='';
+    }
+
+}
     // let myObj = {
     //     name: e.target.name.value,
     //     email: e.target.email.value
@@ -52,20 +83,3 @@ function showUserOnScreen(obj){
     // let obj_deserialized = JSON.parse(localStorage.getItem("myObj"));
 
     // console.log("myObj",obj_deserialized);
-
-    
-     if(nameInput.value === '' || emailInput.value === ''){
-        msg.classList.add('error')
-        msg.innerHTML = 'please enter all fields';
-        setTimeout(() => msg.remove(),3000)
-     }else {
-        
-        const li = document.createElement('li');
-        li.appendChild(document.createTextNode(`${nameInput.value}: ${emailInput.value}`));
-        userList.appendChild(li);
-        
-        nameInput.value = '';
-        emailInput.value ='';
-    }
-
-}
