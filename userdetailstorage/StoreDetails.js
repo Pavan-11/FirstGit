@@ -10,12 +10,18 @@ myForm.addEventListener('submit',onsubmit);
 
 function onsubmit(e){
     e.preventDefault();
-    
-    const name = e.target.name.value
-    const email = e.target.email.value
 
-    localStorage.setItem('name',name)
-    localStorage.setItem('email',email)
+    let myObj = {
+        name: e.target.name.value,
+        email: e.target.email.value
+    }
+    let obj_serialized = JSON.stringify(myObj);
+
+    localStorage.setItem('myObj',obj_serialized);
+
+    let obj_deserialized = JSON.parse(localStorage.getItem("myObj"));
+
+    console.log("myObj",obj_deserialized);
 
     
     if(nameInput.value === '' || emailInput.value === ''){
