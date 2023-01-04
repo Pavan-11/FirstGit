@@ -11,31 +11,55 @@ myForm.addEventListener('submit',onsubmit);
 function onsubmit(e){
     e.preventDefault();
 
-    let myObj = {
-        name: e.target.name.value,
-        email: e.target.email.value
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+
+    const obj = {
+        name,
+        email
     }
-    let obj_serialized = JSON.stringify(myObj);
+    localStorage.setItem(obj.email, JSON.stringify(obj))
+    showUserOnScreen(obj)
+}
 
-    localStorage.setItem('myObj',obj_serialized);
+function showUserOnScreen(obj){
+    const parentElem = document.getElementById('users')
 
-    let obj_deserialized = JSON.parse(localStorage.getItem("myObj"));
 
-    console.log("myObj",obj_deserialized);
+    parentElem.innerHTML = parentElem.innerHTML + `<li>${obj.name} - ${obj.email}</li>`
+    // const childElem = document.createElement('li')
+    // childElem.textContent = obj.name + '-' + obj.email;
+    // parentElem.appendChild(childElem)
+
+
+
+}
+
+    // let myObj = {
+    //     name: e.target.name.value,
+    //     email: e.target.email.value
+    // }
+    // let obj_serialized = JSON.stringify(myObj);
+
+    // localStorage.setItem('myObj',obj_serialized);
+
+    // let obj_deserialized = JSON.parse(localStorage.getItem("myObj"));
+
+    // console.log("myObj",obj_deserialized);
 
     
-    if(nameInput.value === '' || emailInput.value === ''){
-        msg.classList.add('error')
-        msg.innerHTML = 'please enter all fields';
-        setTimeout(() => msg.remove(),3000)
-    }else {
+//     if(nameInput.value === '' || emailInput.value === ''){
+//         msg.classList.add('error')
+//         msg.innerHTML = 'please enter all fields';
+//         setTimeout(() => msg.remove(),3000)
+//     }else {
         
-        const li = document.createElement('li');
-        li.appendChild(document.createTextNode(`${nameInput.value}: ${emailInput.value}`));
-        userList.appendChild(li);
+//         const li = document.createElement('li');
+//         li.appendChild(document.createTextNode(`${nameInput.value}: ${emailInput.value}`));
+//         userList.appendChild(li);
         
-        nameInput.value = '';
-        emailInput.value ='';
+//         nameInput.value = '';
+//         emailInput.value ='';
 
-    }
-}
+//     }
+// }
