@@ -26,14 +26,20 @@ function showUserOnScreen(obj){
     const parentElem = document.getElementById('users')
 
 
-    parentElem.innerHTML = parentElem.innerHTML + `<li>${obj.name} - ${obj.email}</li>`
-    // const childElem = document.createElement('li')
-    // childElem.textContent = obj.name + '-' + obj.email;
-    // parentElem.appendChild(childElem)
+    // parentElem.innerHTML = parentElem.innerHTML + `<li>${obj.name} - ${obj.email}<input type="button" value= "delete" onclick = "deleteValue"></li>`
+    const childElem = document.createElement('li')
+    childElem.textContent = obj.name + '-' + obj.email;
 
 
-
-}
+    const deleteButton = document.createElement('input')
+    deleteButton.type = 'button'
+    deleteButton.value = 'Delete'
+    deleteButton.onclick = () => {
+        localStorage.removeItem(obj.email)
+        parentElem.removeChild(childElem)
+    }
+    childElem.appendChild(deleteButton)
+    parentElem.appendChild(childElem)
 
     // let myObj = {
     //     name: e.target.name.value,
@@ -48,18 +54,18 @@ function showUserOnScreen(obj){
     // console.log("myObj",obj_deserialized);
 
     
-//     if(nameInput.value === '' || emailInput.value === ''){
-//         msg.classList.add('error')
-//         msg.innerHTML = 'please enter all fields';
-//         setTimeout(() => msg.remove(),3000)
-//     }else {
+     if(nameInput.value === '' || emailInput.value === ''){
+        msg.classList.add('error')
+        msg.innerHTML = 'please enter all fields';
+        setTimeout(() => msg.remove(),3000)
+     }else {
         
-//         const li = document.createElement('li');
-//         li.appendChild(document.createTextNode(`${nameInput.value}: ${emailInput.value}`));
-//         userList.appendChild(li);
+        const li = document.createElement('li');
+        li.appendChild(document.createTextNode(`${nameInput.value}: ${emailInput.value}`));
+        userList.appendChild(li);
         
-//         nameInput.value = '';
-//         emailInput.value ='';
+        nameInput.value = '';
+        emailInput.value ='';
+    }
 
-//     }
-// }
+}
